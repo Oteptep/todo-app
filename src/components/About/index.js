@@ -4,8 +4,8 @@ import { Button } from 'react-bootstrap';
 
 function Index(){
 	return (
-    <div>
-    </div>
+		<div>
+		</div>
 	)
 }
 

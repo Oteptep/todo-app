@@ -6,7 +6,7 @@ function Index(){
 	return (
 		<div>
 			<Link to="/">Home</Link>
-			<p>This is s</p>
+			<p>This is aboutpage</p>
 		</div>
 	)
 }

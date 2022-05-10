@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
-function Index(){
+function Index({title}){
+
+  const [firstRender, setFirstRender] = useState(false);
+
+  useEffect(() => {
+    setFirstRender(true)
+  }, []);
+
   return (
-    <div>
-      <Link to="about">About</Link>
-      <p>This is homepage</p>
-    </div>
+    <>
+      {firstRender &&
+        <div>
+          <Link to="about">{title}</Link>
+          <p>This is {title}</p>
+        </div>
+      }
+    </>
+
   )
 }
 

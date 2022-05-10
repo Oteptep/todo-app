@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Button } from 'react-bootstrap';
 
-function Index(){
+function Index({title}){
+
   return (
     <div>
-      <Link to="/">Home</Link>
-      <p>This is aboutpage</p>
+      <Link to="/">{title}</Link>
+      <p>This is {title}</p>
     </div>
   )
 }

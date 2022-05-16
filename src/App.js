@@ -1,37 +1,45 @@
-import React from 'react';
-import { Card, Container, ListGroup } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Card, Container, ListGroup, Button } from 'react-bootstrap'
 
 function App() {
 
-
-  const list = [
+  const [list, setList] = useState([
     {
+      id: 1,
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
+      id: 2,
       name: 'Test',
       done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
+      id: 3,
       name: 'Test',
       done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
+      id: 4,
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
+      id: 5,
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
     }
-  ];
+  ]);
 
+
+  const handleClick = (id) => () => {
+    setList(previous => previous.map(item => item.id === id ? {...item, done: !item.done } : item))
+  }
 
   return (
     <>
@@ -43,7 +51,18 @@ function App() {
             </Card.Header>
             <Card.Body>
               <ListGroup>
-                {list.map(data => <ListGroup.Item><p className="mb-0" style={{ textDecoration: data.done  ? 'line-through' : ''}}>{`${data.name} - ${data.created_at}`}</p></ListGroup.Item>)}
+                {list.map(data => 
+                   <ListGroup.Item className="d-flex justify-content-between">
+                    <p 
+                      className="mb-0" 
+                      style={{ textDecoration: data.done  ? 'line-through' : ''}}>
+                      {`${data.name} ${data.id} - ${data.created_at}`}
+                    </p>
+                    <Button onClick={handleClick(data.id)}>
+                      {data.done ? 'Done' : 'Working'}
+                    </Button>
+                  </ListGroup.Item>
+                )}
               </ListGroup>
             </Card.Body>
           </Card>

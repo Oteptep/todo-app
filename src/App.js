@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
 import { Card, Container, ListGroup, Button } from 'react-bootstrap'
+import uuid from 'react-uuid'
 
 function App() {
 
   const [list, setList] = useState([
     {
-      id: 1,
+      id: uuid(),
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
-      id: 2,
+      id: uuid(),
       name: 'Test',
       done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
-      id: 3,
+      id: uuid(),
       name: 'Test',
       done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
-      id: 4,
+      id: uuid(),
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
-      id: 5,
+      id: uuid(),
       name: 'Test',
       done: true,
       created_at: new Date().toLocaleDateString()
@@ -46,17 +47,17 @@ function App() {
       <Container className="mt-5">
         <div className="d-flex justify-content-center">
           <Card style={{ width: '30rem' }}>
-            <Card.Header className="d-flex align-items-center bg-white">
+            <Card.Header className="d-flex align-items-center bg-white border-0">
               <h6 className="mb-0">Todo App</h6>
             </Card.Header>
             <Card.Body>
               <ListGroup>
-                {list.map(data => 
-                   <ListGroup.Item className="d-flex justify-content-between">
+                {list.map((data, key) => 
+                   <ListGroup.Item key={data.id} className="d-flex justify-content-between">
                     <p 
                       className="mb-0" 
                       style={{ textDecoration: data.done  ? 'line-through' : ''}}>
-                      {`${data.name} ${data.id} - ${data.created_at}`}
+                      {`${data.name} ${key + 1} - ${data.created_at}`}
                     </p>
                     <Button onClick={handleClick(data.id)}>
                       {data.done ? 'Done' : 'Working'}

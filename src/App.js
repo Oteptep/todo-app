@@ -1,45 +1,74 @@
 import React, { useState } from 'react';
-import { Card, Container, ListGroup, Button } from 'react-bootstrap'
+import { Card, Container, ListGroup, Button, Form } from 'react-bootstrap'
 import uuid from 'react-uuid'
 
 function App() {
 
-  const [list, setList] = useState([
+  const [todos, setTodos] = useState([
     {
       id: uuid(),
-      name: 'Test',
-      done: true,
+      name: 'To Clean',
+      is_done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'Test',
-      done: false,
+      name: 'To Work',
+      is_done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'Test',
-      done: false,
+      name: 'To Take a Bath',
+      is_done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'Test',
-      done: true,
+      name: 'To Sleep',
+      is_done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'Test',
-      done: true,
+      name: 'To Cry',
+      is_done: true,
       created_at: new Date().toLocaleDateString()
     }
   ]);
+  const [todo, setTodo] = useState('');
+  const [hasFeedback, setHasFeedback] = useState(false);
 
+  const MESSAGE = 'Todo field is required';
 
   const handleClick = (id) => () => {
-    setList(previous => previous.map(item => item.id === id ? {...item, done: !item.done } : item))
+    setTodos(previous => previous.map(todo => todo.id === id ? {...todo, is_done: !todo.is_done } : todo))
+  }
+
+  const handleChange = (event) => {
+    setTodo(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if(todo === '')  {
+
+      setHasFeedback(true);
+
+      return;
+
+    }
+
+    setTodos(previous => [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }])
+    
+    setTodo('');
+
+    setHasFeedback(false);
+  }
+
+  const handleRemove = (id) => () => {
+    setTodos(previous => previous.filter(todo => todo.id !== id));
   }
 
   return (
@@ -51,17 +80,41 @@ function App() {
               <h6 className="mb-0">Todo App</h6>
             </Card.Header>
             <Card.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Todo</Form.Label>
+                  <Form.Control 
+                    className={hasFeedback ? 'is-invalid' : ''} 
+                    onChange={handleChange} 
+                    type="text" 
+                    value={todo} 
+                    placeholder="Enter Todo" 
+                  />
+                  {hasFeedback &&
+                    <div class="invalid-feedback">
+                      {MESSAGE}
+                    </div>}
+                </Form.Group>
+                <div className="clearfix">
+                  <Button className="mb-3 float-end" type="submit">Submit</Button>
+                </div>
+              </Form>
               <ListGroup>
-                {list.map((data, key) => 
-                   <ListGroup.Item key={data.id} className="d-flex justify-content-between">
+                {todos.map(todo => 
+                   <ListGroup.Item key={todo.id} className="d-flex justify-content-between">
                     <p 
                       className="mb-0" 
-                      style={{ textDecoration: data.done  ? 'line-through' : ''}}>
-                      {`${data.name} ${key + 1} - ${data.created_at}`}
+                      style={{ textDecoration: todo.is_done  ? 'line-through' : ''}}>
+                      {`${todo.name} - ${todo.created_at}`}
                     </p>
-                    <Button onClick={handleClick(data.id)}>
-                      {data.done ? 'Done' : 'Working'}
-                    </Button>
+                    <div>
+                      <Button className="me-2" onClick={handleClick(todo.id)}>
+                        {todo.is_done ? 'Done' : 'Working'}
+                      </Button>
+                      <Button variant="danger" onClick={handleRemove(todo.id)}>
+                        Remove
+                      </Button>
+                    </div>
                   </ListGroup.Item>
                 )}
               </ListGroup>

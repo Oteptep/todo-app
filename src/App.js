@@ -93,7 +93,7 @@ function App() {
                     placeholder="Enter Todo" 
                   />
                   {hasFeedback &&
-                    <div class="invalid-feedback">
+                    <div className="invalid-feedback">
                       {MESSAGE}
                     </div>}
                 </Form.Group>

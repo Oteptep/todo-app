@@ -36,7 +36,7 @@ function App() {
       created_at: new Date().toLocaleDateString()
     }
   ]);
-  
+
   const [todo, setTodo] = useState('');
 
   const [hasFeedback, setHasFeedback] = useState(false);
@@ -102,6 +102,7 @@ function App() {
                 </div>
               </Form>
               <ListGroup>
+                {todos.length === 0 && <h6 className="text-center">No Todos.</h6>}
                 {todos.map(todo => 
                    <ListGroup.Item key={todo.id} className="d-flex justify-content-between">
                     <p 

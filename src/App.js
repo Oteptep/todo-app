@@ -36,7 +36,9 @@ function App() {
       created_at: new Date().toLocaleDateString()
     }
   ]);
+  
   const [todo, setTodo] = useState('');
+
   const [hasFeedback, setHasFeedback] = useState(false);
 
   const MESSAGE = 'Todo field is required';

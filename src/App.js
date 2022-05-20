@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Container, ListGroup, Button, Form } from 'react-bootstrap';
+import { Card, Container, ListGroup, Button, Form, Row, Col } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { FaTrashAlt, FaCheck, FaRedoAlt } from 'react-icons/fa';
 
@@ -8,31 +8,31 @@ function App() {
   const [todos, setTodos] = useState([
     {
       id: uuid(),
-      name: 'To Clean',
-      is_done: true,
-      created_at: new Date().toLocaleDateString()
-    },
-    {
-      id: uuid(),
-      name: 'To Work',
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'To Take Bath',
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: false,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'To Sleep',
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      is_done: false,
+      created_at: new Date().toLocaleDateString()
+    },
+    {
+      id: uuid(),
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: true,
       created_at: new Date().toLocaleDateString()
     },
     {
       id: uuid(),
-      name: 'To Cry',
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: true,
       created_at: new Date().toLocaleDateString()
     }
@@ -103,20 +103,26 @@ function App() {
                 </div>
               </Form>
               <ListGroup>
-                {todos.length === 0 && <h6 className="text-center">No Todos.</h6>}
+                {todos.length === 0 && <h6 className="text-center text-black-50">No Todos.</h6>}
                 {todos.map(todo => 
-                   <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center">
-                    <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>
-                      {`${todo.name} - ${todo.created_at}`}
-                    </p>
-                    <div>
-                      <Button className="me-2" onClick={handleClick(todo.id)}>
-                        {todo.is_done ? <FaRedoAlt /> : <FaCheck />}
-                      </Button>
-                      <Button variant="danger" onClick={handleRemove(todo.id)}>
-                        <FaTrashAlt />
-                      </Button>
-                    </div>
+                   <ListGroup.Item key={todo.id}>
+                    <Row>
+                      <Col md={{ span: 6 }} className="d-flex align-items-center">
+                        <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>
+                          {`${todo.name} - ${todo.created_at}`}
+                        </p>
+                      </Col>
+                      <Col md={{ span: 6 }} className="d-flex align-items-center justify-content-end">
+                        <div>
+                          <Button className="me-2" onClick={handleClick(todo.id)}>
+                            {todo.is_done ? <FaRedoAlt /> : <FaCheck />}
+                          </Button>
+                          <Button variant="danger" onClick={handleRemove(todo.id)}>
+                            <FaTrashAlt />
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </ListGroup.Item>
                 )}
               </ListGroup>

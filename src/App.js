@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Container, ListGroup, Button, Form } from 'react-bootstrap'
-import uuid from 'react-uuid'
+import { Card, Container, ListGroup, Button, Form } from 'react-bootstrap';
+import uuid from 'react-uuid';
+import { FaTrashAlt, FaCheck, FaRedoAlt } from 'react-icons/fa';
 
 function App() {
 
@@ -110,10 +111,10 @@ function App() {
                     </p>
                     <div>
                       <Button className="me-2" onClick={handleClick(todo.id)}>
-                        {todo.is_done ? 'Done' : 'Working'}
+                        {todo.is_done ? <FaRedoAlt /> : <FaCheck />}
                       </Button>
                       <Button variant="danger" onClick={handleRemove(todo.id)}>
-                        Remove
+                        <FaTrashAlt />
                       </Button>
                     </div>
                   </ListGroup.Item>

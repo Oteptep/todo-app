@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Container, ListGroup, Button, Form, Row, Col } from 'react-bootstrap';
 import uuid from 'react-uuid';
-import { FaTrashAlt, FaCheck, FaRedoAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaCheck, FaRedoAlt, FaPencilAlt } from 'react-icons/fa';
 
 function App() {
 
@@ -36,10 +36,12 @@ function App() {
 
   const [hasFeedback, setHasFeedback] = useState(false);
 
+  const [id, setId] = useState('');
+
   const MESSAGE = 'Todo field is required';
 
-  const handleClick = (id) => () => {
-    setTodos(previous => previous.map(todo => todo.id === id ? {...todo, is_done: !todo.is_done } : todo))
+  const handleClick = (_id) => () => {
+    setTodos(previous => previous.map(_todo => _todo.id === _id ? {..._todo, is_done: !_todo.is_done } : _todo))
   }
 
   const handleChange = (event) => {
@@ -57,15 +59,30 @@ function App() {
 
     }
 
-    setTodos(previous => [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }])
-    
+    if(!id) {
+      
+      setTodos(previous => [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }])
+      
+      return;
+
+    }
+
+    setTodos(previous => previous.map(_todo => _todo.id === id ? {..._todo, name: todo } : _todo))
+
+    setId('');
+
     setTodo('');
 
     setHasFeedback(false);
   }
 
-  const handleRemove = (id) => () => {
-    setTodos(previous => previous.filter(todo => todo.id !== id));
+  const handleRemove = (_id) => () => {
+    setTodos(previous => previous.filter(todo => todo.id !== _id));
+  }
+
+  const handleEdit = (_id) => () => {
+    setId(_id);
+    setTodo(todos.find(_todo => _todo.id === _id).name);
   }
 
   return (
@@ -93,7 +110,7 @@ function App() {
                     </div>}
                 </Form.Group>
                 <div className="clearfix">
-                  <Button className="mb-3 float-end" type="submit">Submit</Button>
+                  <Button className="mb-3 float-end" type="submit">{id ? 'Update' : 'Submit'}</Button>
                 </div>
               </Form>
               <ListGroup>
@@ -101,18 +118,21 @@ function App() {
                 {todos.map(todo => 
                   <ListGroup.Item key={todo.id}>
                     <Row>
-                      <Col md={{ span: 8 }} className="d-flex align-items-center">
+                      <Col md={{ span: 6 }} className="d-flex align-items-center">
                         <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>
                           {`${todo.name} - ${todo.created_at}`}
                         </p>
                       </Col>
-                      <Col md={{ span: 4 }} className="d-flex align-items-center justify-content-end">
+                      <Col md={{ span: 6 }} className="d-flex align-items-center justify-content-end">
                         <div>
                           <Button className="me-2" onClick={handleClick(todo.id)}>
                             {todo.is_done ? <FaRedoAlt /> : <FaCheck />}
                           </Button>
-                          <Button variant="danger" onClick={handleRemove(todo.id)}>
+                          <Button className="me-2" variant="danger" onClick={handleRemove(todo.id)}>
                             <FaTrashAlt />
+                          </Button>
+                          <Button variant="warning" onClick={handleEdit(todo.id)}>
+                            <FaPencilAlt />
                           </Button>
                         </div>
                       </Col>

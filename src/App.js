@@ -59,15 +59,11 @@ function App() {
 
     }
 
-    if(!id) {
-      
-      setTodos(previous => [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }])
-      
-      return;
-
-    }
-
-    setTodos(previous => previous.map(_todo => _todo.id === id ? {..._todo, name: todo } : _todo))
+    setTodos(previous => 
+      !id 
+        ? [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }]
+        : previous.map(_todo => _todo.id === id ? {..._todo, name: todo } : _todo)
+    )
 
     setId('');
 
@@ -85,6 +81,11 @@ function App() {
     setTodo(todos.find(_todo => _todo.id === _id).name);
   }
 
+  const handleCancel = () => {
+    setId('');
+    setTodo('');
+  }
+
   return (
     <>
       <Container className="mt-5">
@@ -95,8 +96,7 @@ function App() {
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Todo</Form.Label>
+                <Form.Group className="mb-2">
                   <Form.Control 
                     className={hasFeedback ? 'is-invalid' : ''} 
                     onChange={handleChange} 
@@ -109,8 +109,9 @@ function App() {
                       {MESSAGE}
                     </div>}
                 </Form.Group>
-                <div className="clearfix">
-                  <Button className="mb-3 float-end" type="submit">{id ? 'Update' : 'Submit'}</Button>
+                <div className="d-flex justify-content-end mb-3">
+                  <Button className="me-2" type="submit">{id ? 'Update' : 'Submit'}</Button>
+                  {id && <Button onClick={handleCancel} variant="danger">Cancel</Button>}
                 </div>
               </Form>
               <ListGroup>

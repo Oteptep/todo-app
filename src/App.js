@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Container, ListGroup, Button, Form, Row, Col } from 'react-bootstrap';
-import uuid from 'react-uuid';
 import { FaTrashAlt, FaCheck, FaRedoAlt, FaPencilAlt } from 'react-icons/fa';
+import uuid from 'react-uuid';
 
 function App() {
 

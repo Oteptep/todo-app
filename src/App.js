@@ -9,24 +9,6 @@ function App() {
     {
       id: uuid(),
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      is_done: false,
-      created_at: new Date().toLocaleDateString()
-    },
-    {
-      id: uuid(),
-      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      is_done: false,
-      created_at: new Date().toLocaleDateString()
-    },
-    {
-      id: uuid(),
-      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      is_done: false,
-      created_at: new Date().toLocaleDateString()
-    },
-    {
-      id: uuid(),
-      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: true,
       created_at: new Date().toLocaleDateString()
     },
@@ -35,7 +17,19 @@ function App() {
       name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       is_done: true,
       created_at: new Date().toLocaleDateString()
-    }
+    },
+    {
+      id: uuid(),
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      is_done: false,
+      created_at: new Date().toLocaleDateString()
+    },
+    {
+      id: uuid(),
+      name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      is_done: false,
+      created_at: new Date().toLocaleDateString()
+    },
   ]);
 
   const [todo, setTodo] = useState('');
@@ -107,12 +101,12 @@ function App() {
                 {todos.map(todo => 
                   <ListGroup.Item key={todo.id}>
                     <Row>
-                      <Col md={{ span: 6 }} className="d-flex align-items-center">
+                      <Col md={{ span: 8 }} className="d-flex align-items-center">
                         <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>
                           {`${todo.name} - ${todo.created_at}`}
                         </p>
                       </Col>
-                      <Col md={{ span: 6 }} className="d-flex align-items-center justify-content-end">
+                      <Col md={{ span: 4 }} className="d-flex align-items-center justify-content-end">
                         <div>
                           <Button className="me-2" onClick={handleClick(todo.id)}>
                             {todo.is_done ? <FaRedoAlt /> : <FaCheck />}

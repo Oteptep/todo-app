@@ -105,9 +105,7 @@ function App() {
                 {todos.length === 0 && <h6 className="text-center">No Todos.</h6>}
                 {todos.map(todo => 
                    <ListGroup.Item key={todo.id} className="d-flex justify-content-between">
-                    <p 
-                      className="mb-0" 
-                      style={{ textDecoration: todo.is_done  ? 'line-through' : ''}}>
+                    <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''} `}>
                       {`${todo.name} - ${todo.created_at}`}
                     </p>
                     <div>

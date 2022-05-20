@@ -105,7 +105,7 @@ function App() {
               <ListGroup>
                 {todos.length === 0 && <h6 className="text-center">No Todos.</h6>}
                 {todos.map(todo => 
-                   <ListGroup.Item key={todo.id} className="d-flex justify-content-between">
+                   <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center">
                     <p className={`mb-0 ${todo.is_done && 'text-decoration-line-through'}`}>
                       {`${todo.name} - ${todo.created_at}`}
                     </p>

@@ -87,7 +87,7 @@ function App() {
                 <Form.Group className="mb-3">
                   <Form.Label>Todo</Form.Label>
                   <Form.Control 
-                    className={hasFeedback && 'is-invalid'} 
+                    className={hasFeedback ? 'is-invalid' : ''} 
                     onChange={handleChange} 
                     type="text" 
                     value={todo} 
@@ -106,7 +106,7 @@ function App() {
                 {todos.length === 0 && <h6 className="text-center">No Todos.</h6>}
                 {todos.map(todo => 
                    <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center">
-                    <p className={`mb-0 ${todo.is_done && 'text-decoration-line-through'}`}>
+                    <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>
                       {`${todo.name} - ${todo.created_at}`}
                     </p>
                     <div>

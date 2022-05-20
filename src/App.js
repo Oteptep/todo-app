@@ -105,7 +105,7 @@ function App() {
               <ListGroup>
                 {todos.length === 0 && <h6 className="text-center text-black-50">No Todos.</h6>}
                 {todos.map(todo => 
-                   <ListGroup.Item key={todo.id}>
+                  <ListGroup.Item key={todo.id}>
                     <Row>
                       <Col md={{ span: 6 }} className="d-flex align-items-center">
                         <p className={`mb-0 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>

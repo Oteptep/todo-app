@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Container, ListGroup, Button, Form, Row, Col } from 'react-bootstrap';
 import { FaTrashAlt, FaCheck, FaRedoAlt, FaPencilAlt } from 'react-icons/fa';
 import uuid from 'react-uuid';
+import Header from './components/Header';
 
 function App() {
 
@@ -64,7 +65,7 @@ function App() {
         ? [...previous, { id: uuid(), name: todo, is_done: false, created_at: new Date().toLocaleDateString() }]
         : previous.map(_todo => _todo.id === id ? {..._todo, name: todo } : _todo)
     )
-
+    
     setId('');
 
     setTodo('');
@@ -88,7 +89,8 @@ function App() {
 
   return (
     <>
-      <Container className="mt-5">
+      <Header />
+      <Container fluid style={{ paddingTop: 70 }}>
         <div className="d-flex justify-content-center">
           <Card style={{ width: '30rem' }}>
             <Card.Header className="d-flex align-items-center bg-white border-0">
